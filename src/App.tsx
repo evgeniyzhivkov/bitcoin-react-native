@@ -10,7 +10,7 @@ import AsyncStorage from '@react-native-community/async-storage'
 import { persistCache } from 'apollo3-cache-persist'
 
 import BlocksScreen from './BlocksScreen';
-import TransactionsScreen  from './TransactionsScreen';
+import TransactionsScreen from './TransactionsScreen';
 import Loading from './Loading';
 import { screenOptions } from './styles';
 

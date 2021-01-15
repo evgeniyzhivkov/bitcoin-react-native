@@ -9,7 +9,7 @@ import Loading from './Loading'
 const QUERY = gql`
     query {
         bitcoin{
-            blocks (options:{desc:"medianTime.unixtime",,limit:10}){
+            blocks (options:{desc:"medianTime.unixtime",limit:10}){
               blockHash
               height
               medianTime{
