@@ -43,15 +43,15 @@ export default function TestConnection() {
       <NavigationContainer>
           <Tab.Navigator >
             <Tab.Screen
+              name="Blocks"
+              component={BlocksScreen}
+            />
+            <Tab.Screen
                 name="Transactions"
                 component={TransactionsScreen}
                 options={{
                   title: 'Transactions',
                 }}
-            />
-            <Tab.Screen
-              name="Blocks"
-              component={BlocksScreen}
             />
           </Tab.Navigator>
       </NavigationContainer>

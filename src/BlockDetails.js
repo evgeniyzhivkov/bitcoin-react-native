@@ -1,44 +1,52 @@
 import React from 'react'
-import { View, Text, FlatList, StatusBar, SafeAreaView} from 'react-native'
+import { View, Text, FlatList, StatusBar, SafeAreaView } from 'react-native'
 import { gql, useQuery } from '@apollo/client'
 
 import styles from './styles'
 import Loading from './Loading'
 
 const SECTIONS_QUERY = gql`
-  query Sections($id: Int!) {
-    chapter(id: $id) {
-      sections {
-        number
-        title
+    query($blockHash:String) {
+      bitcoin {
+        blocks(blockHash:{is:$blockHash}) {
+          blockSize
+          count
+          blockHash
+        }
       }
     }
-  }
 `
+const Details = ({
+  details:{
+    blockSize,
+    count,
+  }
 
-const SectionItem = ({ section, chapter }) => (
-  <View style={styles.item}>
-    <Text style={styles.header}>
-      {chapter.number}.{section.number}: {section.title}
+}) => (
+  <>
+    <Text>
+      {blockSize}
     </Text>
-  </View>
+    <Text>
+      {count}
+    </Text>
+  </>
 )
 
-export default ({ route }) => {
+export default ({ route:{ params: { block: { blockHash}}} }) => {
   const { data, loading } = useQuery(SECTIONS_QUERY, {
-    variables: { blockHash: route.params.block.blockHash },
+    variables: { blockHash },
   })
+
+  
 
   return (
     <>
-    <StatusBar barStyle="dark-content" />
-    <SafeAreaView>
-        { loading && <Loading/> || (
-            <Text>
-              details
-            </Text>
-        )}
-    </SafeAreaView>
-</>
+      {loading && <Loading /> || (
+        <Details
+          details={data.bitcoin.blocks[0]}
+        />
+      )}
+    </>
   )
 }
