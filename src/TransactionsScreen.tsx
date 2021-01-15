@@ -5,7 +5,7 @@ import { gql, useQuery, useMutation } from '@apollo/client'
 import styles from './styles'
 import Loading from './Loading'
 
-const CHAPTERS_QUERY = gql`
+const QUERY = gql`
     query($from: ISO8601DateTime, $till: ISO8601DateTime){
       bitcoin{
         transactions(options: {desc: "date.date", limit:5 }, 
@@ -18,24 +18,34 @@ const CHAPTERS_QUERY = gql`
     }
 `
 
+const TransactionItem = ({
+    transaction: {
+        txVolUSD
+    }
+}) => (
+    <View
+        style={styles.item}
+    >
+        <Text style={styles.header}>{txVolUSD}</Text>
+    </View>
+)
+
 export default ({ navigation }) => {
-    const { data, loading } = useQuery(CHAPTERS_QUERY, {
+    const { data, loading } = useQuery(QUERY, {
         variables: { "from": "2021-01-15T01:03:30+00:00", "till": null }
     })
 
     return (
         <>
             <StatusBar barStyle="dark-content" />
-            <SafeAreaView>
-                { loading && <Loading/> || (
+            <SafeAreaView style={{flex:1}}>
+                {loading && <Loading /> || (
                     <FlatList
                         data={data.bitcoin.transactions}
-                        renderItem={({
-                            item: {
-                                txVolUSD
-                            }
-                        }) => (
-                            <Text style={styles.header}>{txVolUSD}</Text>
+                        renderItem={({item}) => (
+                            <TransactionItem
+                                transaction={item}
+                            />
                         )}
                         keyExtractor={({ index }) => index.toString()}
                     />

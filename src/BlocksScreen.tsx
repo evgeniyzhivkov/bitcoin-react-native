@@ -1,15 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
-import {
-  Text,
-  StatusBar,
-} from 'react-native';
-import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 
 import BlocksList from './BlocksList'
 import BlockDetails from './BlockDetails'
-import Loading from './Loading'
 import { screenOptions } from './styles'
 
 const Stack = createStackNavigator()

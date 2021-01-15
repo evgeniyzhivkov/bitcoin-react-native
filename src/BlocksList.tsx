@@ -1,14 +1,15 @@
 import React from 'react'
-import { Text, FlatList, Pressable } from 'react-native'
-import { gql, useQuery, useMutation} from '@apollo/client'
+import { View, Text, FlatList, Pressable } from 'react-native'
+import { gql, useQuery, useMutation } from '@apollo/client'
+import { format, formatDistance} from 'date-fns'
 
 import styles from './styles'
 import Loading from './Loading'
 
-const CHAPTERS_QUERY = gql`
-    {
+const QUERY = gql`
+    query {
         bitcoin{
-            blocks (options:{ limit:10}){
+            blocks (options:{desc:"medianTime.unixtime",,limit:10}){
               blockHash
               height
               medianTime{
@@ -19,47 +20,46 @@ const CHAPTERS_QUERY = gql`
     }
 `
 
-const TransactionItem = ({
-    transaction:{
+const BlockItem = ({
+    block: {
         blockHash,
         height,
-        medianTime:{
+        medianTime: {
             unixtime
         }
-    }, onPress }) => {
-
-        return (
-            <Pressable style={styles.item} onPress={onPress}>
-                <Text style={styles.header}>{blockHash}</Text>
-            </Pressable>
-        )
-    }
+    }, onPress }) => (
+    <Pressable style={styles.item} onPress={onPress}>
+        <View style={styles.row}>
+            <Text style={styles.header}>
+                {`Time: ${format(unixtime*1000,"yyyy/dd/MM HH:mm") }`}
+            </Text>
+            <Text style={styles.info}>
+                {`${formatDistance(unixtime*1000, new Date()) }`}
+            </Text>
+        </View>
+        <Text style={styles.subheader}>{`height: ${height}`}</Text>
+        <Text style={styles.info}>{`${blockHash}`}</Text>
+    </Pressable>
+)
 
 export default ({ navigation }) => {
-    const { data, loading } = useQuery(CHAPTERS_QUERY)
+    const { data, loading } = useQuery(QUERY)
 
     if (loading) {
-        return <Loading/>
-    }
-    if(data == null)
-    {
-        return (
-            <Text>
-                data is null
-            </Text>
-        )
+        return <Loading />
     }
 
     return (
         <FlatList
             data={data.bitcoin.blocks}
             renderItem={({ item }) => (
-                <TransactionItem
-                    transaction={item}
-                    onPress={() => navigation.navigate('BlockDetail', { block: item })}
+                <BlockItem
+                    block={item}
+                    onPress={() => 
+                        navigation.navigate('BlockDetail', { block: item })}
                 />
             )}
-            keyExtractor={({blockHash}) => blockHash}
+            keyExtractor={({ blockHash }) => blockHash}
         />
     )
 }

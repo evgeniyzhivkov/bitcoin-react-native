@@ -5,7 +5,7 @@ import { gql, useQuery } from '@apollo/client'
 import styles from './styles'
 import Loading from './Loading'
 
-const SECTIONS_QUERY = gql`
+const QUERY = gql`
     query($blockHash:String) {
       bitcoin {
         blocks(blockHash:{is:$blockHash}) {
@@ -34,12 +34,10 @@ const Details = ({
 )
 
 export default ({ route:{ params: { block: { blockHash}}} }) => {
-  const { data, loading } = useQuery(SECTIONS_QUERY, {
+  const { data, loading } = useQuery(QUERY, {
     variables: { blockHash },
   })
-
   
-
   return (
     <>
       {loading && <Loading /> || (
