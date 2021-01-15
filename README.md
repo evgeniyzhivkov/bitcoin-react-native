@@ -41,31 +41,31 @@ I prefer iOS as development enviroment (for now is only tested on iOS)
 
 ## Best case for continuing project
 - for best desing steps are:
- - UX mockups on some desing softwate (I preffer Adobe XD)
- - Integration of animation liblary if the design team can provide animations
- - good desing have to implement Accessebility
-  - dark/light theme preference
-  - color blindness considuration
-  - different motion preferences
-  - different transperency preferences
-  - using the divase with unconvinient methods
-    - keyboard, mause, switch controll
-    - voice control, 
- - usablitity screens
-    - widgets
-    - context menu
-    - apple Watch companion App
-    - Siri shortcuts
+    - UX mockups on some desing softwate (I preffer Adobe XD)
+    - Integration of animation liblary if the design team can provide animations
+    - good desing have to implement Accessebility
+    - dark/light theme preference
+    - color blindness considuration
+    - different motion preferences
+    - different transperency preferences
+    - using the divase with unconvinient methods
+        - keyboard, mause, switch controll
+        - voice control, 
+    - usablitity screens
+        - widgets
+        - context menu
+        - apple Watch companion App
+        - Siri shortcuts
 - implementation of tests
- - mocking up server, I recomend docker
- - UI test
- - Accessebility test
-  - motion
-  - readability of content
-  - usability (button size and location)
+    - mocking up server, I recomend docker
+    - UI test
+    - Accessebility test
+        - motion
+        - readability of content
+        - usability (button size and location)
  - Integration tests
-  - the project has to not to go to production if the app is not usable 
+    - the project has to not to go to production if the app is not usable 
 - translations implementation
- - have to be discused and decided on translation system
- - I reccoment creation tools for the translators
+    - have to be discused and decided on translation system
+    - I reccoment creation tools for the translators
 - common module for the communication
