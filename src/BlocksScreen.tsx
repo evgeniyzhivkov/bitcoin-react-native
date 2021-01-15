@@ -15,7 +15,7 @@ export default function BlocksScreen() {
       <Stack.Screen
         name="List"
         component={BlocksList}
-        options={{ title: 'Bitcoins Blocs' }}
+        options={{ title: 'Bitcoins Blocks' }}
       />
       <Stack.Screen
         name="BlockDetail"
