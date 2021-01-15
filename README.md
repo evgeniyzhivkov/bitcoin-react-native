@@ -20,7 +20,7 @@ or
 ```
 yarn android
 ```
-Or if you are using Windows or you don�t have yanr the installation needs to be done in this way:
+Or if you are using Windows or you don't have yarn the installation needs to be done in this way:
 ```
 npm install
 npx pod-install
