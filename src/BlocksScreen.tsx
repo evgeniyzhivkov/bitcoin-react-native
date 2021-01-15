@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack'
+import { format } from 'date-fns'
 
 import BlocksList from './BlocksList'
 import BlockDetails from './BlockDetails'
@@ -22,11 +23,13 @@ export default function BlocksScreen() {
         options={({
           route: {
             params: {
-              block: { blockHash, height}
+              block: { medianTime: {
+                unixtime
+              }}
             },
           },
         }) => ({
-          title: `${blockHash}: ${height}`,
+          title: format(unixtime*1000,"yyyy/dd/MM HH:mm"),
           gestureResponseDistance: { horizontal: 500 },
         })}
       />

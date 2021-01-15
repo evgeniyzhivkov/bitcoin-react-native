@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, FlatList, StatusBar, SafeAreaView } from 'react-native'
+import { View, Text } from 'react-native'
 import { gql, useQuery } from '@apollo/client'
 
 import styles from './styles'
@@ -11,40 +11,60 @@ const QUERY = gql`
         blocks(blockHash:{is:$blockHash}) {
           blockSize
           count
-          blockHash
+          transactionCount
+          difficulty
+          blockVersion
         }
       }
     }
 `
-const Details = ({
-  details:{
-    blockSize,
-    count,
-  }
-
-}) => (
-  <>
-    <Text>
-      {blockSize}
-    </Text>
-    <Text>
-      {count}
-    </Text>
-  </>
-)
 
 export default ({ route:{ params: { block: { blockHash}}} }) => {
   const { data, loading } = useQuery(QUERY, {
     variables: { blockHash },
   })
-  
+
+  if(loading) {
+    return <Loading/>
+  }
+  let [ {
+    blockSize,
+    count,
+    transactionCount,
+    difficulty,
+    blockVersion,
+  } ] = data.bitcoin.blocks;
   return (
-    <>
-      {loading && <Loading /> || (
-        <Details
-          details={data.bitcoin.blocks[0]}
-        />
-      )}
-    </>
+    [
+      {
+        title:"Size",
+        value:blockSize,
+      },
+      {
+        title:"Count",
+        value:count,
+      },
+      {
+        title:"Transactions Count",
+        value:transactionCount,
+      },
+      {
+        title:"Difficulty",
+        value:difficulty,
+      },
+      {
+        title:"Version",
+        value:blockVersion,
+      }
+    ].map(({title, value}) => (
+      <View key={title} style={styles.section}> 
+        <Text style={styles.header}>
+          {title}:
+        </Text>
+        <Text style={styles.subheader}>
+          {value}
+        </Text>
+      </View>
+    ))
   )
 }

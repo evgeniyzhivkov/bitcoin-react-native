@@ -23,6 +23,12 @@ export default StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#cccccc',
   },
+  section: {
+    paddingTop: 16,
+    paddingBottom: 16,
+    paddingLeft: 20,
+    paddingRight: 20,
+  },
   row:{
     flexDirection: 'row',
     justifyContent:"space-between",
