@@ -43,6 +43,7 @@ I prefer iOS as development environment (for now this app is only tested on iOS)
 - [ ] make file to test if yarn is installed
 - [ ] add maintenance for android build
 - [ ] dark theme
+- [ ] add ininite scroll to the lists (or pagination)
 
 ## Recommendations for further development of the project
 - Design recommendations:
