@@ -31,9 +31,9 @@ this is recomended byt React Native setup documentation
 I prefer iOS as development enviroment (for now is only tested on iOS)
 
 ## Screenshots
-![Blocks List](./preview/screen1)
-![Blocks Details](./preview/screen2)
-![Transactions List](./preview/screen3)
+![Blocks List](./preview/screen1.png)
+![Blocks Details](./preview/screen2.png)
+![Transactions List](./preview/screen3.png)
 
 ## Known Issues
 - [ ] there is cache and there is not implemented how merge new incomming data
